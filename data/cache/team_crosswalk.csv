@@ -1,0 +1,370 @@
+bart_name,kaggle_name,kaggle_team_id,match_method,match_score
+Ohio St.,Ohio St,1326,fuzzy,93.33333333333333
+Kansas,Kansas,1242,fuzzy,100.0
+Duke,Duke,1181,fuzzy,100.0
+Texas,Texas,1400,fuzzy,100.0
+Kentucky,Kentucky,1246,fuzzy,100.0
+Pittsburgh,Pittsburgh,1338,fuzzy,100.0
+Wisconsin,Wisconsin,1458,fuzzy,100.0
+Notre Dame,Notre Dame,1323,fuzzy,100.0
+Purdue,Purdue,1345,fuzzy,100.0
+San Diego St.,San Diego St,1361,fuzzy,96.0
+North Carolina,North Carolina,1314,fuzzy,100.0
+Illinois,Illinois,1228,fuzzy,100.0
+Connecticut,Connecticut,1163,fuzzy,100.0
+Louisville,Louisville,1257,fuzzy,100.0
+Syracuse,Syracuse,1393,fuzzy,100.0
+BYU,BYU,1140,manual,100.0
+Florida,Florida,1196,fuzzy,100.0
+Washington,Washington,1449,fuzzy,100.0
+West Virginia,West Virginia,1452,fuzzy,100.0
+Arizona,Arizona,1112,fuzzy,100.0
+Kansas St.,Kansas St,1243,fuzzy,94.73684210526316
+Utah St.,Utah St,1429,fuzzy,93.33333333333333
+Clemson,Clemson,1155,fuzzy,100.0
+Cincinnati,Cincinnati,1153,fuzzy,100.0
+UNLV,UNLV,1424,manual,100.0
+Michigan,Michigan,1276,fuzzy,100.0
+Wichita St.,Wichita St,1455,fuzzy,95.23809523809523
+Gonzaga,Gonzaga,1211,fuzzy,100.0
+St. John's,St John's,1385,manual,100.0
+Virginia Tech,Virginia Tech,1439,fuzzy,100.0
+Florida St.,Florida St,1199,fuzzy,95.23809523809523
+Vanderbilt,Vanderbilt,1435,fuzzy,100.0
+Marquette,Marquette,1266,fuzzy,100.0
+Belmont,Belmont,1125,fuzzy,100.0
+Villanova,Villanova,1437,fuzzy,100.0
+Butler,Butler,1139,fuzzy,100.0
+Georgetown,Georgetown,1207,fuzzy,100.0
+Temple,Temple,1396,fuzzy,100.0
+George Mason,George Mason,1206,fuzzy,100.0
+Maryland,Maryland,1268,fuzzy,100.0
+Missouri,Missouri,1281,fuzzy,100.0
+Alabama,Alabama,1104,fuzzy,100.0
+Georgia,Georgia,1208,fuzzy,100.0
+UCLA,UCLA,1417,fuzzy,100.0
+Penn St.,Penn St,1336,fuzzy,93.33333333333333
+Saint Mary's,St Mary's CA,1388,manual,100.0
+USC,USC,1425,manual,100.0
+Xavier,Xavier,1462,fuzzy,100.0
+Richmond,Richmond,1350,fuzzy,100.0
+Northwestern,Northwestern,1321,fuzzy,100.0
+Tennessee,Tennessee,1397,fuzzy,100.0
+Michigan St.,Michigan St,1277,fuzzy,95.65217391304348
+Washington St.,Washington St,1450,fuzzy,96.2962962962963
+Old Dominion,Old Dominion,1330,fuzzy,100.0
+Miami FL,Miami FL,1274,manual,100.0
+New Mexico,New Mexico,1307,fuzzy,100.0
+Seton Hall,Seton Hall,1371,fuzzy,100.0
+Texas A&M,Texas A&M,1401,fuzzy,100.0
+Minnesota,Minnesota,1278,fuzzy,100.0
+Duquesne,Duquesne,1182,fuzzy,100.0
+VCU,VCU,1433,manual,100.0
+Colorado,Colorado,1160,fuzzy,100.0
+Boston College,Boston College,1130,fuzzy,100.0
+UTEP,UTEP,1431,manual,100.0
+Oakland,Oakland,1324,fuzzy,100.0
+UAB,UAB,1412,manual,100.0
+Charleston,Charleston So,1149,fuzzy,86.95652173913044
+Iona,Iona,1233,fuzzy,100.0
+Southern Miss,Southern Miss,1379,fuzzy,100.0
+Cleveland St.,Cleveland St,1156,fuzzy,96.0
+California,California,1143,fuzzy,100.0
+Nebraska,Nebraska,1304,fuzzy,100.0
+Mississippi,Mississippi,1279,fuzzy,100.0
+Missouri St.,Missouri St,1283,fuzzy,95.65217391304348
+Oklahoma St.,Oklahoma St,1329,fuzzy,95.65217391304348
+Oregon,Oregon,1332,fuzzy,100.0
+Virginia,Virginia,1438,fuzzy,100.0
+Colorado St.,Colorado St,1161,fuzzy,95.65217391304348
+Baylor,Baylor,1124,fuzzy,100.0
+Iowa St.,Iowa St,1235,fuzzy,93.33333333333333
+Iowa,Iowa,1234,fuzzy,100.0
+Princeton,Princeton,1343,fuzzy,100.0
+Rutgers,Rutgers,1353,fuzzy,100.0
+Wofford,Wofford,1459,fuzzy,100.0
+Indiana,Indiana,1231,fuzzy,100.0
+Creighton,Creighton,1166,fuzzy,100.0
+Harvard,Harvard,1217,fuzzy,100.0
+Marshall,Marshall,1267,fuzzy,100.0
+Memphis,Memphis,1272,fuzzy,100.0
+Arkansas,Arkansas,1116,fuzzy,100.0
+Tulsa,Tulsa,1409,fuzzy,100.0
+Drexel,Drexel,1180,fuzzy,100.0
+Portland,Portland,1339,fuzzy,100.0
+N.C. State,NC State,1301,fuzzy,88.88888888888889
+Boise St.,Boise St,1129,fuzzy,94.11764705882352
+Indiana St.,Indiana St,1232,fuzzy,95.23809523809523
+Long Beach St.,Long Beach St,1253,fuzzy,96.2962962962963
+Northern Iowa,Northern Iowa,1320,fuzzy,100.0
+Georgia Tech,Georgia Tech,1210,fuzzy,100.0
+Bucknell,Bucknell,1137,fuzzy,100.0
+South Dakota St.,South Dakota,1377,fuzzy,85.71428571428572
+Dayton,Dayton,1173,fuzzy,100.0
+Mississippi St.,Mississippi St,1280,fuzzy,96.55172413793103
+Fairfield,Fairfield,1193,fuzzy,100.0
+East Tennessee St.,ETSU,1190,manual,100.0
+Kent St.,Kent,1245,manual,100.0
+Valparaiso,Valparaiso,1434,fuzzy,100.0
+Stanford,Stanford,1390,fuzzy,100.0
+UCF,UCF,1416,manual,100.0
+Morehead St.,Morehead St,1287,fuzzy,95.65217391304348
+South Florida,South Florida,1378,fuzzy,100.0
+Wright St.,Wright St,1460,fuzzy,94.73684210526316
+Providence,Providence,1344,fuzzy,100.0
+Arizona St.,Arizona St,1113,fuzzy,95.23809523809523
+Montana,Montana,1285,fuzzy,100.0
+Santa Clara,Santa Clara,1365,fuzzy,100.0
+Rhode Island,Rhode Island,1348,fuzzy,100.0
+Texas Tech,Texas Tech,1403,fuzzy,100.0
+Buffalo,Buffalo,1138,fuzzy,100.0
+Saint Louis,St Louis,1387,manual,100.0
+Akron,Akron,1103,fuzzy,100.0
+Oral Roberts,Oral Roberts,1331,fuzzy,100.0
+Detroit Mercy,Detroit,1178,manual,100.0
+LIU,LIU Brooklyn,1254,manual,100.0
+James Madison,James Madison,1241,fuzzy,100.0
+Austin Peay,Austin Peay,1122,fuzzy,100.0
+Rider,Rider,1351,fuzzy,100.0
+Northern Colorado,N Colorado,1294,manual,100.0
+St. Bonaventure,St Bonaventure,1382,manual,100.0
+SMU,SMU,1374,manual,100.0
+Saint Peter's,St Peter's,1389,fuzzy,86.95652173913044
+Vermont,Vermont,1436,fuzzy,100.0
+Ohio,Ohio,1325,fuzzy,100.0
+Air Force,Air Force,1102,fuzzy,100.0
+Murray St.,Murray St,1293,fuzzy,94.73684210526316
+IU Indy,IUPUI,1237,manual,100.0
+Loyola Chicago,Loyola-Chicago,1260,manual,100.0
+Utah,Utah,1428,fuzzy,100.0
+Milwaukee,WI Milwaukee,1454,manual,100.0
+UC Santa Barbara,UC Santa Barbara,1364,manual,100.0
+Idaho,Idaho,1225,fuzzy,100.0
+San Francisco,San Francisco,1362,fuzzy,100.0
+Oklahoma,Oklahoma,1328,fuzzy,100.0
+Robert Morris,Robert Morris,1352,fuzzy,100.0
+South Carolina,South Carolina,1376,fuzzy,100.0
+Coastal Carolina,Coastal Car,1157,manual,100.0
+Northern Arizona,Northern Arizona,1319,fuzzy,100.0
+Pacific,Pacific,1334,fuzzy,100.0
+Hawaii,Hawaii,1218,fuzzy,100.0
+Rice,Rice,1349,fuzzy,100.0
+Hofstra,Hofstra,1220,fuzzy,100.0
+George Washington,G Washington,1203,manual,100.0
+Davidson,Davidson,1172,fuzzy,100.0
+Nevada,Nevada,1305,fuzzy,100.0
+New Mexico St.,New Mexico St,1308,fuzzy,96.2962962962963
+San Jose St.,San Jose St,1363,fuzzy,95.65217391304348
+Western Michigan,W Michigan,1444,manual,100.0
+Central Connecticut,Central Conn,1148,manual,100.0
+East Carolina,East Carolina,1187,fuzzy,100.0
+Quinnipiac,Quinnipiac,1346,fuzzy,100.0
+Sam Houston St.,Sam Houston St,1358,fuzzy,96.55172413793103
+Oregon St.,Oregon St,1333,fuzzy,94.73684210526316
+North Dakota St.,N Dakota St,1295,manual,100.0
+TCU,TCU,1395,manual,100.0
+Green Bay,WI Green Bay,1453,fuzzy,85.71428571428572
+Western Carolina,W Carolina,1441,manual,100.0
+Furman,Furman,1202,fuzzy,100.0
+La Salle,La Salle,1247,fuzzy,100.0
+UNC Asheville,UNC Asheville,1421,fuzzy,100.0
+Cal Poly,Cal Poly,1142,fuzzy,100.0
+Jacksonville,Jacksonville,1239,fuzzy,100.0
+American,American Univ,1110,manual,100.0
+Weber St.,Weber St,1451,fuzzy,94.11764705882352
+Evansville,Evansville,1191,fuzzy,100.0
+Ball St.,Ball St,1123,fuzzy,93.33333333333333
+Northeastern,Northeastern,1318,fuzzy,100.0
+Purdue Fort Wayne,PFW,1236,manual,100.0
+Boston University,Boston Univ,1131,manual,100.0
+Massachusetts,Massachusetts,1269,fuzzy,100.0
+North Texas,North Texas,1317,fuzzy,100.0
+Bradley,Bradley,1133,fuzzy,100.0
+Drake,Drake,1179,fuzzy,100.0
+Lipscomb,Lipscomb,1252,fuzzy,100.0
+Florida Atlantic,FL Atlantic,1194,manual,100.0
+Penn,Penn,1335,fuzzy,100.0
+Southern Illinois,S Illinois,1356,manual,100.0
+Fresno St.,Fresno St,1201,fuzzy,94.73684210526316
+Miami OH,Miami OH,1275,fuzzy,100.0
+Canisius,Canisius,1145,fuzzy,100.0
+LSU,LSU,1261,manual,100.0
+Stephen F. Austin,SF Austin,1372,manual,100.0
+UTSA,UT San Antonio,1427,manual,100.0
+Delaware,Delaware,1174,fuzzy,100.0
+Yale,Yale,1463,fuzzy,100.0
+Saint Joseph's,St Joseph's PA,1386,manual,100.0
+Cornell,Cornell,1165,fuzzy,100.0
+Loyola Marymount,Loy Marymount,1258,fuzzy,89.65517241379311
+Columbia,Columbia,1162,fuzzy,100.0
+Middle Tennessee,MTSU,1292,manual,100.0
+Loyola MD,Loyola MD,1259,manual,100.0
+Lehigh,Lehigh,1250,fuzzy,100.0
+McNeese St.,McNeese St,1270,fuzzy,95.23809523809523
+Tulane,Tulane,1408,fuzzy,100.0
+Denver,Denver,1176,fuzzy,100.0
+Mercer,Mercer,1273,fuzzy,100.0
+Maine,Maine,1263,fuzzy,100.0
+William & Mary,William & Mary,1456,fuzzy,100.0
+Siena,Siena,1373,fuzzy,100.0
+DePaul,DePaul,1177,fuzzy,100.0
+Wyoming,Wyoming,1461,fuzzy,100.0
+Appalachian St.,Appalachian St,1111,fuzzy,96.55172413793103
+St. Francis NY,St Francis NY,1383,fuzzy,96.2962962962963
+Houston,Houston,1222,fuzzy,100.0
+Illinois St.,Illinois St,1229,fuzzy,95.65217391304348
+Charlotte,Charlotte,1150,fuzzy,100.0
+Stony Brook,Stony Brook,1392,fuzzy,100.0
+Western Kentucky,WKU,1443,manual,100.0
+UC Irvine,UC Irvine,1414,fuzzy,100.0
+Tennessee Tech,Tennessee Tech,1399,fuzzy,100.0
+Arkansas St.,Arkansas St,1117,fuzzy,95.65217391304348
+UNC Wilmington,UNC Wilmington,1423,fuzzy,100.0
+Georgia St.,Georgia St,1209,fuzzy,95.23809523809523
+Little Rock,Ark Little Rock,1114,manual,100.0
+Brown,Brown,1135,fuzzy,100.0
+Louisiana,Louisiana,1418,fuzzy,100.0
+Tennessee St.,Tennessee St,1398,fuzzy,96.0
+Lafayette,Lafayette,1248,fuzzy,100.0
+Youngstown St.,Youngstown St,1464,fuzzy,96.2962962962963
+Elon,Elon,1189,fuzzy,100.0
+Hampton,Hampton,1214,fuzzy,100.0
+Cal St. Northridge,CS Northridge,1169,manual,100.0
+Albany,SUNY Albany,1107,manual,100.0
+Auburn,Auburn,1120,fuzzy,100.0
+North Florida,North Florida,1316,fuzzy,100.0
+VMI,VMI,1440,fuzzy,100.0
+Utah Valley,Utah Valley,1430,fuzzy,100.0
+Pepperdine,Pepperdine,1337,fuzzy,100.0
+Eastern Kentucky,E Kentucky,1184,manual,100.0
+Nicholls St.,Nicholls St,1311,fuzzy,95.65217391304348
+Lamar,Lamar,1249,fuzzy,100.0
+Holy Cross,Holy Cross,1221,fuzzy,100.0
+Wagner,Wagner,1447,fuzzy,100.0
+Bowling Green,Bowling Green,1132,fuzzy,100.0
+Southern Utah,Southern Utah,1381,fuzzy,100.0
+Morgan St.,Morgan St,1288,fuzzy,94.73684210526316
+Wake Forest,Wake Forest,1448,fuzzy,100.0
+Charleston Southern,Charleston So,1149,manual,100.0
+Winthrop,Winthrop,1457,fuzzy,100.0
+UC Davis,UC Davis,1413,fuzzy,100.0
+Texas St.,Texas St,1402,fuzzy,94.11764705882352
+Illinois Chicago,IL Chicago,1227,manual,100.0
+Seattle,Seattle,1370,fuzzy,100.0
+Eastern Washington,E Washington,1186,manual,100.0
+UMKC,Missouri KC,1282,manual,100.0
+Southeastern Louisiana,SE Louisiana,1368,manual,100.0
+Louisiana Tech,Louisiana Tech,1256,fuzzy,100.0
+Cal St. Fullerton,CS Fullerton,1168,manual,100.0
+Campbell,Campbell,1144,fuzzy,100.0
+Liberty,Liberty,1251,fuzzy,100.0
+Northwestern St.,Northwestern,1321,fuzzy,85.71428571428572
+UT Arlington,UT Arlington,1426,fuzzy,100.0
+Montana St.,Montana St,1286,fuzzy,95.23809523809523
+Towson,Towson,1406,fuzzy,100.0
+Mount St. Mary's,Mt St Mary's,1291,fuzzy,85.71428571428572
+Troy,Troy,1407,fuzzy,100.0
+Hartford,Hartford,1216,fuzzy,100.0
+Portland St.,Portland St,1340,fuzzy,95.65217391304348
+Central Michigan,C Michigan,1141,manual,100.0
+FIU,Florida Intl,1198,manual,100.0
+Chattanooga,Chattanooga,1151,fuzzy,100.0
+Sacred Heart,Sacred Heart,1357,fuzzy,100.0
+Army,Army,1119,fuzzy,100.0
+Navy,Navy,1298,fuzzy,100.0
+Eastern Michigan,E Michigan,1185,manual,100.0
+UNC Greensboro,UNC Greensboro,1422,fuzzy,100.0
+Presbyterian,Presbyterian,1342,fuzzy,100.0
+Florida Gulf Coast,FGCU,1195,manual,100.0
+San Diego,San Diego,1360,fuzzy,100.0
+Bethune Cookman,Bethune-Cookman,1126,fuzzy,93.33333333333333
+Coppin St.,Coppin St,1164,fuzzy,94.73684210526316
+The Citadel,Citadel,1154,manual,100.0
+UC Riverside,UC Riverside,1415,fuzzy,100.0
+Monmouth,Monmouth NJ,1284,manual,100.0
+Gardner Webb,Gardner Webb,1205,fuzzy,100.0
+Fordham,Fordham,1200,fuzzy,100.0
+Northern Illinois,N Illinois,1296,manual,100.0
+New Hampshire,New Hampshire,1306,fuzzy,100.0
+Jacksonville St.,Jacksonville St,1240,fuzzy,96.7741935483871
+Savannah St.,Savannah St,1366,fuzzy,95.65217391304348
+South Alabama,South Alabama,1375,fuzzy,100.0
+South Dakota,South Dakota,1377,fuzzy,100.0
+Idaho St.,Idaho St,1226,fuzzy,94.11764705882352
+Tennessee Martin,TN Martin,1404,manual,100.0
+Stetson,Stetson,1391,fuzzy,100.0
+North Dakota,North Dakota,1315,fuzzy,100.0
+Norfolk St.,Norfolk St,1313,fuzzy,95.23809523809523
+Jackson St.,Jackson St,1238,fuzzy,95.23809523809523
+Saint Francis,St Francis PA,1384,manual,100.0
+Manhattan,Manhattan,1264,fuzzy,100.0
+Cal St. Bakersfield,CS Bakersfield,1167,manual,100.0
+Southeast Missouri St.,SE Missouri St,1369,manual,100.0
+North Carolina A&T,North Carolina,1314,fuzzy,87.5
+Niagara,Niagara,1310,fuzzy,100.0
+Eastern Illinois,E Illinois,1183,manual,100.0
+Samford,Samford,1359,fuzzy,100.0
+Longwood,Longwood,1255,fuzzy,100.0
+Mississippi Valley St.,MS Valley St,1290,manual,100.0
+North Carolina Central,NC Central,1300,manual,100.0
+Colgate,Colgate,1159,fuzzy,100.0
+NJIT,NJIT,1312,fuzzy,100.0
+Texas Southern,TX Southern,1411,manual,100.0
+Alabama St.,Alabama St,1106,fuzzy,95.23809523809523
+Texas A&M Corpus Chris,TAM C. Christi,1394,manual,100.0
+Binghamton,Binghamton,1127,fuzzy,100.0
+Delaware St.,Delaware St,1175,fuzzy,95.65217391304348
+Bryant,Bryant,1136,fuzzy,100.0
+Fairleigh Dickinson,F Dickinson,1192,manual,100.0
+High Point,High Point,1219,fuzzy,100.0
+Dartmouth,Dartmouth,1171,fuzzy,100.0
+USC Upstate,SC Upstate,1367,fuzzy,95.23809523809523
+Marist,Marist,1265,fuzzy,100.0
+Kennesaw St.,Kennesaw,1244,manual,100.0
+Sacramento St.,CS Sacramento,1170,manual,100.0
+South Carolina St.,South Carolina,1376,fuzzy,87.5
+Alabama A&M,Alabama A&M,1105,fuzzy,100.0
+Georgia Southern,Ga Southern,1204,manual,100.0
+Florida A&M,Florida A&M,1197,fuzzy,100.0
+Louisiana Monroe,ULM,1419,manual,100.0
+UT Rio Grande Valley,UTRGV,1410,manual,100.0
+Western Illinois,W Illinois,1442,manual,100.0
+Central Arkansas,Cent Arkansas,1146,fuzzy,89.65517241379311
+Grambling St.,Grambling,1212,manual,100.0
+Maryland Eastern Shore,MD E Shore,1271,manual,100.0
+Houston Christian,Houston Chr,1223,manual,100.0
+Toledo,Toledo,1405,fuzzy,100.0
+Radford,Radford,1347,fuzzy,100.0
+Howard,Howard,1224,fuzzy,100.0
+UMBC,UMBC,1420,fuzzy,100.0
+Prairie View A&M,Prairie View,1341,fuzzy,85.71428571428572
+Arkansas Pine Bluff,Ark Pine Bluff,1115,manual,100.0
+SIU Edwardsville,SIUE,1188,manual,100.0
+Alcorn St.,Alcorn St,1108,fuzzy,94.73684210526316
+Centenary,Centenary,1147,fuzzy,100.0
+Chicago St.,Chicago St,1152,fuzzy,95.23809523809523
+Southern,Southern Univ,1380,manual,100.0
+Nebraska Omaha,NE Omaha,1303,manual,100.0
+Northern Kentucky,N Kentucky,1297,manual,100.0
+New Orleans,New Orleans,1309,fuzzy,100.0
+Grand Canyon,Grand Canyon,1213,fuzzy,100.0
+Incarnate Word,Incarnate Word,1230,fuzzy,100.0
+UMass Lowell,MA Lowell,1262,manual,100.0
+Abilene Christian,Abilene Chr,1101,manual,100.0
+Cal Baptist,Cal Baptist,1465,fuzzy,100.0
+North Alabama,North Alabama,1466,fuzzy,100.0
+Merrimack,Merrimack,1467,fuzzy,100.0
+Bellarmine,Bellarmine,1468,fuzzy,100.0
+Tarleton St.,Tarleton St,1470,fuzzy,95.65217391304348
+UC San Diego,UC San Diego,1471,fuzzy,100.0
+Utah Tech,Utah Tech,1469,fuzzy,100.0
+St. Thomas,St Thomas MN,1472,manual,100.0
+Queens,Queens NC,1474,manual,100.0
+Southern Indiana,Southern Indiana,1475,fuzzy,100.0
+East Texas A&M,East Texas A&M,1477,fuzzy,100.0
+Stonehill,Stonehill,1476,fuzzy,100.0
+Lindenwood,Lindenwood,1473,fuzzy,100.0
+Le Moyne,Le Moyne,1478,fuzzy,100.0
+Mercyhurst,Mercyhurst,1479,fuzzy,100.0
+West Georgia,West Georgia,1480,fuzzy,100.0
+New Haven,New Haven,1481,fuzzy,100.0
