@@ -9,10 +9,13 @@ import os
 import sys
 from pathlib import Path
 
-from dotenv import load_dotenv
-
 _root = Path(__file__).resolve().parent
-load_dotenv(_root / ".env")
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv(_root / ".env")
+except ImportError:
+    pass  # Streamlit Cloud sets env vars via its Secrets manager
 
 import numpy as np
 import pandas as pd
