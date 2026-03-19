@@ -97,8 +97,10 @@ def build_models(db: TeamDB):
     return models
 
 
+_CACHE_VERSION = 2  # bump to invalidate cached bracket dataframes
+
 @st.cache_data(show_spinner="Simulating brackets…")
-def simulate_all(_db, _seeds_df, _slots_df, actuals_csv: str | None):
+def simulate_all(_db, _seeds_df, _slots_df, actuals_csv: str | None, _v=_CACHE_VERSION):
     models = build_models(_db)
     brackets = {}
     bracket_dfs = {}
