@@ -1,33 +1,33 @@
 region,seed_hi,seed_lo,team_hi,team_lo,prob_hi_wins,threshold,predicted_winner
-W,1,16,Duke,Siena,0.996,0.5,Duke
-W,2,15,Connecticut,Furman,0.997,0.5,Connecticut
-W,3,14,Michigan St,N Dakota St,0.882,0.5,Michigan St
-W,4,13,Kansas,Cal Baptist,0.92,0.5,Kansas
-W,5,12,St John's,Northern Iowa,0.894,0.6,St John's
-W,6,11,Louisville,South Florida,0.911,0.6,Louisville
-W,7,10,UCLA,UCF,0.907,0.601,UCLA
+W,1,16,Duke,Siena,0.949,0.5,Duke
+W,2,15,Connecticut,Furman,0.954,0.5,Connecticut
+W,3,14,Michigan St,N Dakota St,0.863,0.5,Michigan St
+W,4,13,Kansas,Cal Baptist,0.836,0.5,Kansas
+W,5,12,St John's,Northern Iowa,0.923,0.6,St John's
+W,6,11,Louisville,South Florida,0.888,0.6,Louisville
+W,7,10,UCLA,UCF,0.883,0.601,UCLA
 W,8,9,Ohio St,TCU,0.955,0.519,Ohio St
-X,1,16,Florida,Prairie View,0.995,0.5,Florida
-X,2,15,Houston,Idaho,0.989,0.5,Houston
-X,3,14,Illinois,Penn,0.993,0.5,Illinois
-X,4,13,Nebraska,Troy,0.991,0.5,Nebraska
-X,5,12,Vanderbilt,McNeese St,0.97,0.6,Vanderbilt
-X,6,11,North Carolina,VCU,0.771,0.6,North Carolina
-X,7,10,St Mary's CA,Texas A&M,0.453,0.601,Texas A&M
-X,8,9,Clemson,Iowa,0.608,0.519,Clemson
-Y,1,16,Michigan,Howard,0.997,0.5,Michigan
-Y,2,15,Iowa St,Tennessee St,0.996,0.5,Iowa St
-Y,3,14,Virginia,Wright St,0.98,0.5,Virginia
-Y,4,13,Alabama,Hofstra,0.932,0.5,Alabama
-Y,5,12,Texas Tech,Akron,0.869,0.6,Texas Tech
-Y,6,11,Tennessee,Miami OH,0.988,0.6,Tennessee
-Y,7,10,Kentucky,Santa Clara,0.391,0.601,Santa Clara
-Y,8,9,Georgia,St Louis,0.78,0.519,Georgia
-Z,1,16,Arizona,LIU Brooklyn,0.997,0.5,Arizona
-Z,2,15,Purdue,Queens NC,0.995,0.5,Purdue
-Z,3,14,Gonzaga,Kennesaw,0.987,0.5,Gonzaga
-Z,4,13,Arkansas,Hawaii,0.963,0.5,Arkansas
-Z,5,12,Wisconsin,High Point,0.972,0.6,Wisconsin
-Z,6,11,BYU,Texas,0.464,0.6,Texas
-Z,7,10,Miami FL,Missouri,0.575,0.601,Missouri
-Z,8,9,Villanova,Utah St,0.441,0.519,Utah St
+X,1,16,Florida,Prairie View,0.946,0.5,Florida
+X,2,15,Houston,Idaho,0.954,0.5,Houston
+X,3,14,Illinois,Penn,0.962,0.5,Illinois
+X,4,13,Nebraska,Troy,0.968,0.5,Nebraska
+X,5,12,Vanderbilt,McNeese St,0.952,0.6,Vanderbilt
+X,6,11,North Carolina,VCU,0.654,0.6,North Carolina
+X,7,10,St Mary's CA,Texas A&M,0.64,0.601,St Mary's CA
+X,8,9,Clemson,Iowa,0.672,0.519,Clemson
+Y,1,16,Michigan,Howard,0.962,0.5,Michigan
+Y,2,15,Iowa St,Tennessee St,0.933,0.5,Iowa St
+Y,3,14,Virginia,Wright St,0.939,0.5,Virginia
+Y,4,13,Alabama,Hofstra,0.923,0.5,Alabama
+Y,5,12,Texas Tech,Akron,0.93,0.6,Texas Tech
+Y,6,11,Tennessee,Miami OH,0.946,0.6,Tennessee
+Y,7,10,Kentucky,Santa Clara,0.423,0.601,Santa Clara
+Y,8,9,Georgia,St Louis,0.749,0.519,Georgia
+Z,1,16,Arizona,LIU Brooklyn,0.962,0.5,Arizona
+Z,2,15,Purdue,Queens NC,0.946,0.5,Purdue
+Z,3,14,Gonzaga,Kennesaw,0.973,0.5,Gonzaga
+Z,4,13,Arkansas,Hawaii,0.954,0.5,Arkansas
+Z,5,12,Wisconsin,High Point,0.961,0.6,Wisconsin
+Z,6,11,BYU,Texas,0.445,0.6,Texas
+Z,7,10,Miami FL,Missouri,0.64,0.601,Miami FL
+Z,8,9,Villanova,Utah St,0.625,0.519,Villanova
