@@ -1,6 +1,9 @@
 # Secrets — NEVER commit your real API key
 .env
 
+# Virtual environment
+venv/
+
 # Python
 __pycache__/
 *.pyc
