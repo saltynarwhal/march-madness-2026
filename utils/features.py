@@ -208,6 +208,103 @@ def build_detailed_box_features(kg_detailed, seasons):
 
 
 # ---------------------------------------------------------------------------
+# Game-by-game variance features
+# ---------------------------------------------------------------------------
+
+def build_variance_features(kg_detailed, seasons):
+    """Compute game-by-game variance features that capture upset risk.
+
+    Season averages hide a critical factor: **consistency**. A team that
+    scores 80 points every game is very different from one that scores
+    100 one night and 60 the next — even though both average 80.
+
+    In single-elimination tournaments, one bad game ends your season.
+    High-variance teams are dangerous underdogs (can explode for a win)
+    and risky favorites (can collapse for a loss).
+
+    Produces per team-season:
+      - ``scoring_consistency``: coefficient of variation of points scored
+        (std / mean). Lower = more consistent. High CV favorites are upset-prone.
+      - ``fg3_volatility``: std dev of 3-point shooting % across games.
+        High volatility means the team can go ice-cold from 3 on any given night.
+      - ``fg3_reliance``: share of total points that come from 3-pointers.
+        High reliance + high volatility = maximum upset risk.
+      - ``to_rate``: turnovers per game. Tournament pressure amplifies
+        turnover-prone teams — more turnovers under stress.
+      - ``to_volatility``: std dev of turnovers per game. Inconsistent
+        ball security is a red flag in high-pressure games.
+
+    Parameters
+    ----------
+    kg_detailed : pd.DataFrame
+        Kaggle ``MRegularSeasonDetailedResults.csv`` with per-game box scores.
+    seasons : iterable of int
+        Which seasons to include.
+
+    Returns
+    -------
+    pd.DataFrame or None
+        One row per team-season with variance features.
+    """
+    if kg_detailed is None:
+        print("[SKIP] MRegularSeasonDetailedResults.csv not available.")
+        return None
+
+    det = kg_detailed[kg_detailed['Season'].isin(seasons)].copy()
+
+    # Winner perspective
+    w = det[['Season', 'WTeamID', 'WScore', 'WFGM3', 'WFGA3', 'WTO',
+             'WFGM', 'WFGA']].copy()
+    w.columns = ['season', 'team_id', 'score', 'fgm3', 'fga3', 'to', 'fgm', 'fga']
+
+    # Loser perspective
+    el = det[['Season', 'LTeamID', 'LScore', 'LFGM3', 'LFGA3', 'LTO',
+              'LFGM', 'LFGA']].copy()
+    el.columns = ['season', 'team_id', 'score', 'fgm3', 'fga3', 'to', 'fgm', 'fga']
+
+    games = pd.concat([w, el], ignore_index=True)
+    for col in games.columns[2:]:
+        games[col] = pd.to_numeric(games[col], errors='coerce')
+
+    # Per-game shooting percentages
+    games['fg3_pct'] = games['fgm3'] / games['fga3'].replace(0, np.nan)
+    # Share of points from 3-pointers
+    games['fg3_share'] = (games['fgm3'] * 3) / games['score'].replace(0, np.nan)
+
+    records = []
+    for (season, team_id), grp in games.groupby(['season', 'team_id']):
+        n = len(grp)
+        if n < 5:
+            continue  # need enough games for meaningful variance
+        records.append({
+            'season':               int(season),
+            'team_id':              int(team_id),
+            # Scoring consistency: coefficient of variation (lower = more consistent)
+            'scoring_consistency':  grp['score'].std() / grp['score'].mean()
+                                    if grp['score'].mean() > 0 else np.nan,
+            # 3pt volatility: std of 3pt% across games
+            'fg3_volatility':       grp['fg3_pct'].std(),
+            # 3pt reliance: avg share of points from 3s
+            'fg3_reliance':         grp['fg3_share'].mean(),
+            # Turnover rate: turnovers per game
+            'to_rate':              grp['to'].mean(),
+            # Turnover volatility: std of turnovers per game
+            'to_volatility':        grp['to'].std(),
+            'n_games':              n,
+        })
+
+    out = pd.DataFrame(records)
+    print(f"Variance features: {out.shape[0]:,} team-seasons  |  "
+          f"{int(out['season'].min())}–{int(out['season'].max())}")
+    _diag_season = int(out['season'].max())
+    print(f"Sample distribution ({_diag_season}):")
+    print(out[out['season'] == _diag_season][
+        ['scoring_consistency', 'fg3_volatility', 'fg3_reliance', 'to_rate', 'to_volatility']
+    ].describe().round(3))
+    return out
+
+
+# ---------------------------------------------------------------------------
 # Massey Ordinals consensus
 # ---------------------------------------------------------------------------
 

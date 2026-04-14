@@ -25,6 +25,7 @@ from .features import (
     add_diff_features,
     build_reg_season_features,
     build_detailed_box_features,
+    build_variance_features,
     build_massey_consensus,
     make_2026_features,
 )
@@ -66,7 +67,7 @@ __all__ = [
     "try_kaggle_download", "load_kaggle_file",
     # Features
     "is_late_round", "add_diff_features",
-    "build_reg_season_features", "build_detailed_box_features",
+    "build_reg_season_features", "build_detailed_box_features", "build_variance_features",
     "build_massey_consensus", "make_2026_features",
     # Matchups
     "get_team_features", "build_matchup_dataset",
