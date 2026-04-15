@@ -460,6 +460,26 @@ def make_2026_features(teamA_id, teamB_id,
 
     adj_em_diff = feat.get('adj_em_diff', np.nan)
 
+    # ── Asymmetric matchup interaction features ────────────────────────────
+    # Mirror of build_matchup_dataset interactions — must stay in sync.
+
+    # Offensive vs defensive matchup (asymmetric)
+    va_o = pd.to_numeric(rA['adj_o'] if 'adj_o' in rA.index else np.nan, errors='coerce')
+    vb_o = pd.to_numeric(rB['adj_o'] if 'adj_o' in rB.index else np.nan, errors='coerce')
+    va_d = pd.to_numeric(rA['adj_d'] if 'adj_d' in rA.index else np.nan, errors='coerce')
+    vb_d = pd.to_numeric(rB['adj_d'] if 'adj_d' in rB.index else np.nan, errors='coerce')
+    feat['matchup_a_offense'] = va_o - vb_d
+    feat['matchup_b_offense'] = vb_o - va_d
+
+    # Tempo mismatch (absolute)
+    va_t = pd.to_numeric(rA['adj_t'] if 'adj_t' in rA.index else np.nan, errors='coerce')
+    vb_t = pd.to_numeric(rB['adj_t'] if 'adj_t' in rB.index else np.nan, errors='coerce')
+    feat['tempo_mismatch'] = abs(va_t - vb_t) if not (np.isnan(va_t) or np.isnan(vb_t)) else np.nan
+
+    # Late-round x efficiency interaction (is_late_round is always 0 at prediction time
+    # for R64, but kept here so the feature vector shape matches training)
+    feat['late_x_em'] = feat['is_late_round'] * adj_em_diff if not np.isnan(adj_em_diff) else np.nan
+
     # Seed disagreement: residual of adj_em_diff after controlling for seed_diff.
     # Positive = team is better than their seed implies.
     if not np.isnan(seed_diff_val) and not np.isnan(adj_em_diff):

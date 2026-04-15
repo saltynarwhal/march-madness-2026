@@ -230,6 +230,34 @@ def build_matchup_dataset(kg_compact, kg_seeds, crosswalk, bart_teams,
         if ac in df.columns and bc in df.columns:
             df[f'{m}_diff'] = df[ac] - df[bc]
 
+    # ── 7. Asymmetric matchup interaction features ─────────────────────────
+    # Unlike symmetric diff features ("who is better overall"), these capture
+    # how Team A's offense matches up against Team B's defense specifically.
+
+    # Offensive-vs-defensive matchup: how much does A's offense beat B's defense?
+    # Positive = A's offense is stronger than B's defense (favorable matchup for A).
+    if 'a_adj_o' in df.columns and 'b_adj_d' in df.columns:
+        df['matchup_a_offense'] = df['a_adj_o'] - df['b_adj_d']
+    if 'b_adj_o' in df.columns and 'a_adj_d' in df.columns:
+        df['matchup_b_offense'] = df['b_adj_o'] - df['a_adj_d']
+
+    # Tempo mismatch: absolute difference in adjusted tempo.
+    # Teams that prefer very different paces create stylistic friction.
+    if 'a_adj_t' in df.columns and 'b_adj_t' in df.columns:
+        df['tempo_mismatch'] = (df['a_adj_t'] - df['b_adj_t']).abs()
+
+    # Late-round x efficiency: in early rounds a large EM gap almost guarantees
+    # a win; in later rounds both teams are elite so the interaction weakens.
+    if 'is_late_round' in df.columns and 'adj_em_diff' in df.columns:
+        df['late_x_em'] = df['is_late_round'] * df['adj_em_diff']
+
+    # 3-point reliance vs perimeter defense (only if variance features merged in).
+    # High fg3_reliance against a team with low def_efg = vulnerable matchup.
+    if 'a_fg3_reliance' in df.columns and 'b_def_efg' in df.columns:
+        df['fg3_vs_defense_a'] = df['a_fg3_reliance'] * df['b_def_efg']
+    if 'b_fg3_reliance' in df.columns and 'a_def_efg' in df.columns:
+        df['fg3_vs_defense_b'] = df['b_fg3_reliance'] * df['a_def_efg']
+
     print(f"\nMatchup dataset built: {len(df):,} games "
           f"({skipped} skipped — missing Barttorvik data)")
     return df
