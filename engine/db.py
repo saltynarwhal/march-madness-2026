@@ -1,10 +1,13 @@
 """Team fact database for March Madness prediction engine."""
 
+import logging
 import re
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 from sklearn.linear_model import LinearRegression
 
 
@@ -172,6 +175,10 @@ class TeamDB:
 
         # Seed features
         if np.isnan(a_seed) or np.isnan(b_seed):
+            if np.isnan(a_seed):
+                logger.warning("Missing seed for team %d, defaulting to 8", team_a_id)
+            if np.isnan(b_seed):
+                logger.warning("Missing seed for team %d, defaulting to 8", team_b_id)
             features["seed_diff"] = 0.0
             features["min_seed"] = 8.0
             features["is_big_gap"] = 0

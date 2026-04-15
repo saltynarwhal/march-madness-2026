@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+logger = logging.getLogger(__name__)
+
 from engine.db import TeamDB
-from engine.models.base import Prediction, PredictionModel
+from engine.models.base import Prediction, PredictionModel, scores_from_margin
 
 DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
 LINES_PATH = DATA_DIR / "vegas_lines.csv"
@@ -199,13 +202,14 @@ class VegasOddsModel(PredictionModel):
         """Seed-based placeholder when neither real lines nor AI are available."""
         seed_a = db.get_seed(team_a_id)
         seed_b = db.get_seed(team_b_id)
+        if np.isnan(seed_a):
+            logger.warning("Missing seed for team %d, defaulting to 8", team_a_id)
+        if np.isnan(seed_b):
+            logger.warning("Missing seed for team %d, defaulting to 8", team_b_id)
         sa = seed_a if not np.isnan(seed_a) else 8
         sb = seed_b if not np.isnan(seed_b) else 8
-        gap = sa - sb
-        total = 140.0
-        margin = gap * 1.5
-        score_a = (total - margin) / 2
-        score_b = (total + margin) / 2
+        margin = (sb - sa) * 1.5
+        score_a, score_b = scores_from_margin(margin, floor=0.0)
         winner = team_a_id if score_a > score_b else team_b_id
         return Prediction(
             team_a_score=round(score_a, 1),
@@ -220,7 +224,7 @@ class VegasOddsModel(PredictionModel):
 
     @staticmethod
     def _cache_key(name_a: str, name_b: str) -> str:
-        return f"{name_a} vs {name_b}"
+        return " vs ".join(sorted([name_a, name_b]))
 
     def _load_cache(self) -> dict:
         if self._cache_path.exists():
@@ -257,11 +261,7 @@ class VegasOddsModel(PredictionModel):
             margin = -spread
             winner = team_b_id
 
-        score_a = (total + margin) / 2
-        score_b = (total - margin) / 2
-
-        score_a = max(score_a, 40.0)
-        score_b = max(score_b, 40.0)
+        score_a, score_b = scores_from_margin(margin, total)
 
         confidence = min(spread / 25.0, 1.0) * 0.5 + 0.5
 

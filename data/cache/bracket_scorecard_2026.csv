@@ -1,10 +1,10 @@
 option,total_pts,correct,R64,R32,S16,E8,FF,CH
-D (Surgical),1150,49,27,12,6,3,1,0
-G (Diminishing),1080,50,28,14,5,2,1,0
-B (Threshold),1080,50,28,14,5,2,1,0
-I (Cond Champion),1030,46,25,13,5,2,1,0
-C (MC Consensus),1030,46,25,13,5,2,1,0
-H (EPP),1030,46,25,13,5,2,1,0
-F (Risk Budget),1010,45,25,12,5,2,1,0
-A (Sampled),960,44,26,11,4,2,1,0
-E (EV Maximized),960,44,26,11,4,2,1,0
+A (Sampled),1280,45,26,11,4,2,1,1
+C (MC Consensus),1000,44,24,12,5,2,1,0
+I (Cond Champion),1000,44,24,12,5,2,1,0
+H (EPP),1000,44,24,12,5,2,1,0
+E (EV Maximized),970,43,25,10,5,2,1,0
+G (Diminishing),970,43,25,10,5,2,1,0
+D (Surgical),960,43,26,9,5,2,1,0
+B (Threshold),950,42,25,9,5,2,1,0
+F (Risk Budget),900,40,24,9,4,2,1,0

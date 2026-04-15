@@ -6,6 +6,16 @@ from typing import TypedDict
 from engine.db import TeamDB
 
 
+def scores_from_margin(margin: float, total: float = 140.0, floor: float = 40.0) -> tuple[float, float]:
+    """Compute (score_a, score_b) from margin and total.
+
+    margin > 0 means Team A wins by that many points.
+    """
+    score_a = max((total + margin) / 2, floor)
+    score_b = max((total - margin) / 2, floor)
+    return score_a, score_b
+
+
 class Prediction(TypedDict):
     team_a_score: float
     team_b_score: float

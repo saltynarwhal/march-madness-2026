@@ -143,8 +143,7 @@ def accuracy_table(
             just_row[name] = _win_accuracy(just_slice)
 
         rows.append(cum_row)
-        if i > 0:
-            rows.append(just_row)
+        rows.append(just_row)
 
     return pd.DataFrame(rows)
 
@@ -267,3 +266,73 @@ def _spread_mae(df: pd.DataFrame) -> float:
         if all(pd.notna(v) for v in [pred_s, pred_w, act_s, act_w]):
             errors.append(abs((pred_s - pred_w) - (act_s - act_w)))
     return float(np.mean(errors)) if errors else np.nan
+
+
+# ------------------------------------------------------------------
+# Calibration & Brier Score
+# ------------------------------------------------------------------
+
+
+def calibration_summary(
+    bracket_dfs: dict[str, pd.DataFrame],
+    n_bins: int = 5,
+) -> pd.DataFrame:
+    """Compute Brier score and ECE per model from bracket dataframes.
+
+    Confidence semantics: P(predicted winner wins this game), range [0.5, 1.0].
+    Outcome: 1 if predicted winner actually won, 0 otherwise.
+    """
+    rows: list[dict] = []
+    for name, df in bracket_dfs.items():
+        graded = _graded_games(df)
+        if graded.empty or "confidence" not in graded.columns:
+            rows.append({"model": name, "brier_score": np.nan, "ece": np.nan, "n_games": 0})
+            continue
+
+        conf = graded["confidence"].astype(float)
+        mask = conf.notna()
+        if mask.sum() == 0:
+            rows.append({"model": name, "brier_score": np.nan, "ece": np.nan, "n_games": 0})
+            continue
+
+        graded = graded.loc[mask].copy()
+        conf = graded["confidence"].astype(float)
+
+        if "result_winner_id" in graded.columns:
+            truth = graded["result_winner_id"]
+        else:
+            truth = graded["actual_winner_id"]
+        outcome = (graded["pred_winner_id"] == truth).astype(float)
+
+        brier = float(((conf - outcome) ** 2).mean())
+        ece = _expected_calibration_error(conf.values, outcome.values, n_bins=n_bins)
+        rows.append({
+            "model": name,
+            "brier_score": round(brier, 4),
+            "ece": round(ece, 4),
+            "n_games": int(len(graded)),
+        })
+
+    return pd.DataFrame(rows)
+
+
+def _expected_calibration_error(
+    confidences: np.ndarray,
+    outcomes: np.ndarray,
+    n_bins: int = 5,
+) -> float:
+    """Weighted average |accuracy - confidence| across equal-width bins in [0.5, 1.0]."""
+    bin_edges = np.linspace(0.5, 1.0, n_bins + 1)
+    total = len(confidences)
+    if total == 0:
+        return np.nan
+    ece = 0.0
+    for lo, hi in zip(bin_edges[:-1], bin_edges[1:]):
+        mask = (confidences >= lo) & (confidences < hi if hi < 1.0 else confidences <= hi)
+        n = mask.sum()
+        if n == 0:
+            continue
+        avg_conf = confidences[mask].mean()
+        avg_acc = outcomes[mask].mean()
+        ece += (n / total) * abs(avg_acc - avg_conf)
+    return float(ece)

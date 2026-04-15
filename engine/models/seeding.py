@@ -1,6 +1,10 @@
 """Seeding-only model – higher seed wins, ties broken by W/L%."""
 
+import logging
+
 import numpy as np
+
+logger = logging.getLogger(__name__)
 
 from engine.db import TeamDB
 from engine.models.base import Prediction, PredictionModel
@@ -43,6 +47,10 @@ class SeedingModel(PredictionModel):
             winner = self._tiebreak(team_a_id, team_b_id, db)
 
         # Scores: try historical averages first, fall back to formula
+        if np.isnan(seed_a):
+            logger.warning("Missing seed for team %d, defaulting to 8", team_a_id)
+        if np.isnan(seed_b):
+            logger.warning("Missing seed for team %d, defaulting to 8", team_b_id)
         sa_seed = int(seed_a) if not np.isnan(seed_a) else 8
         sb_seed = int(seed_b) if not np.isnan(seed_b) else 8
 

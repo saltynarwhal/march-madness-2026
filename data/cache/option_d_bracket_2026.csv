@@ -1,64 +1,64 @@
 round,round_idx,winner_id,winner_seed,winner_name,loser_id,loser_seed,loser_name,win_prob,is_upset,is_chalk_pick,edge_pts
-Round of 64,0,1181,1,Duke,1373,16,Siena,0.952,False,True,0
-Round of 64,0,1326,8,Ohio St,1395,9,TCU,0.906,False,True,0
-Round of 64,0,1385,5,St John's,1320,12,Northern Iowa,0.957,False,True,0
-Round of 64,0,1242,4,Kansas,1465,13,Cal Baptist,0.842,False,True,0
-Round of 64,0,1257,6,Louisville,1378,11,South Florida,0.818,False,True,0
-Round of 64,0,1277,3,Michigan St,1295,14,N Dakota St,0.889,False,True,0
-Round of 64,0,1417,7,UCLA,1416,10,UCF,0.875,False,True,0
-Round of 64,0,1163,2,Connecticut,1202,15,Furman,0.96,False,True,0
-Round of 64,0,1196,1,Florida,1341,16,Prairie View,0.952,False,True,0
-Round of 64,0,1234,9,Iowa,1155,8,Clemson,0.695,True,False,10
-Round of 64,0,1435,5,Vanderbilt,1270,12,McNeese St,0.916,False,True,0
-Round of 64,0,1304,4,Nebraska,1407,13,Troy,0.97,False,True,0
-Round of 64,0,1433,11,VCU,1314,6,North Carolina,0.413,True,False,10
-Round of 64,0,1228,3,Illinois,1335,14,Penn,0.975,False,True,0
-Round of 64,0,1401,10,Texas A&M,1388,7,St Mary's CA,0.447,True,False,10
-Round of 64,0,1222,2,Houston,1225,15,Idaho,0.97,False,True,0
-Round of 64,0,1276,1,Michigan,1224,16,Howard,0.967,False,True,0
-Round of 64,0,1208,8,Georgia,1387,9,St Louis,0.691,False,True,0
-Round of 64,0,1403,5,Texas Tech,1103,12,Akron,0.928,False,True,0
-Round of 64,0,1104,4,Alabama,1220,13,Hofstra,0.926,False,True,0
-Round of 64,0,1397,6,Tennessee,1275,11,Miami OH,0.949,False,True,0
-Round of 64,0,1438,3,Virginia,1460,14,Wright St,0.826,False,True,0
-Round of 64,0,1365,10,Santa Clara,1246,7,Kentucky,0.545,True,False,10
-Round of 64,0,1235,2,Iowa St,1398,15,Tennessee St,0.952,False,True,0
-Round of 64,0,1112,1,Arizona,1254,16,LIU Brooklyn,0.967,False,True,0
-Round of 64,0,1429,9,Utah St,1437,8,Villanova,0.406,True,False,10
-Round of 64,0,1458,5,Wisconsin,1219,12,High Point,0.934,False,True,0
-Round of 64,0,1116,4,Arkansas,1218,13,Hawaii,0.957,False,True,0
-Round of 64,0,1400,11,Texas,1140,6,BYU,0.604,True,False,10
-Round of 64,0,1211,3,Gonzaga,1244,14,Kennesaw,0.956,False,True,0
-Round of 64,0,1281,10,Missouri,1274,7,Miami FL,0.383,True,False,10
-Round of 64,0,1345,2,Purdue,1474,15,Queens NC,0.952,False,True,0
-Round of 32,1,1181,1,Duke,1326,8,Ohio St,0.784,False,True,0
-Round of 32,1,1385,5,St John's,1242,4,Kansas,0.625,True,False,20
-Round of 32,1,1257,6,Louisville,1277,3,Michigan St,0.413,True,False,20
-Round of 32,1,1163,2,Connecticut,1417,7,UCLA,0.66,False,True,0
-Round of 32,1,1196,1,Florida,1234,9,Iowa,0.76,False,True,0
-Round of 32,1,1435,5,Vanderbilt,1304,4,Nebraska,0.538,True,False,20
+Round of 64,0,1181,1,Duke,1373,16,Siena,0.95,False,True,0
+Round of 64,0,1326,8,Ohio St,1395,9,TCU,0.864,False,True,0
+Round of 64,0,1385,5,St John's,1320,12,Northern Iowa,0.932,False,True,0
+Round of 64,0,1242,4,Kansas,1465,13,Cal Baptist,0.863,False,True,0
+Round of 64,0,1257,6,Louisville,1378,11,South Florida,0.869,False,True,0
+Round of 64,0,1277,3,Michigan St,1295,14,N Dakota St,0.908,False,True,0
+Round of 64,0,1417,7,UCLA,1416,10,UCF,0.858,False,True,0
+Round of 64,0,1163,2,Connecticut,1202,15,Furman,0.955,False,True,0
+Round of 64,0,1196,1,Florida,1341,16,Prairie View,0.95,False,True,0
+Round of 64,0,1155,8,Clemson,1234,9,Iowa,0.671,False,True,0
+Round of 64,0,1435,5,Vanderbilt,1270,12,McNeese St,0.937,False,True,0
+Round of 64,0,1304,4,Nebraska,1407,13,Troy,0.963,False,True,0
+Round of 64,0,1433,11,VCU,1314,6,North Carolina,0.361,True,False,10
+Round of 64,0,1228,3,Illinois,1335,14,Penn,0.967,False,True,0
+Round of 64,0,1401,10,Texas A&M,1388,7,St Mary's CA,0.454,True,False,10
+Round of 64,0,1222,2,Houston,1225,15,Idaho,0.958,False,True,0
+Round of 64,0,1276,1,Michigan,1224,16,Howard,0.965,False,True,0
+Round of 64,0,1208,8,Georgia,1387,9,St Louis,0.662,False,True,0
+Round of 64,0,1403,5,Texas Tech,1103,12,Akron,0.908,False,True,0
+Round of 64,0,1104,4,Alabama,1220,13,Hofstra,0.936,False,True,0
+Round of 64,0,1397,6,Tennessee,1275,11,Miami OH,0.929,False,True,0
+Round of 64,0,1438,3,Virginia,1460,14,Wright St,0.943,False,True,0
+Round of 64,0,1365,10,Santa Clara,1246,7,Kentucky,0.445,True,False,10
+Round of 64,0,1235,2,Iowa St,1398,15,Tennessee St,0.95,False,True,0
+Round of 64,0,1112,1,Arizona,1254,16,LIU Brooklyn,0.965,False,True,0
+Round of 64,0,1429,9,Utah St,1437,8,Villanova,0.415,True,False,10
+Round of 64,0,1458,5,Wisconsin,1219,12,High Point,0.95,False,True,0
+Round of 64,0,1116,4,Arkansas,1218,13,Hawaii,0.953,False,True,0
+Round of 64,0,1400,11,Texas,1140,6,BYU,0.449,True,False,10
+Round of 64,0,1211,3,Gonzaga,1244,14,Kennesaw,0.971,False,True,0
+Round of 64,0,1281,10,Missouri,1274,7,Miami FL,0.374,True,False,10
+Round of 64,0,1345,2,Purdue,1474,15,Queens NC,0.95,False,True,0
+Round of 32,1,1181,1,Duke,1326,8,Ohio St,0.856,False,True,0
+Round of 32,1,1242,4,Kansas,1385,5,St John's,0.671,False,True,0
+Round of 32,1,1257,6,Louisville,1277,3,Michigan St,0.46,True,False,20
+Round of 32,1,1417,7,UCLA,1163,2,Connecticut,0.371,True,False,20
+Round of 32,1,1196,1,Florida,1155,8,Clemson,0.922,False,True,0
+Round of 32,1,1435,5,Vanderbilt,1304,4,Nebraska,0.471,True,False,20
 Round of 32,1,1228,3,Illinois,1433,11,VCU,0.934,False,True,0
-Round of 32,1,1222,2,Houston,1401,10,Texas A&M,0.922,False,True,0
-Round of 32,1,1276,1,Michigan,1208,8,Georgia,0.934,False,True,0
-Round of 32,1,1104,4,Alabama,1403,5,Texas Tech,0.688,False,True,0
-Round of 32,1,1397,6,Tennessee,1438,3,Virginia,0.6,True,False,20
-Round of 32,1,1235,2,Iowa St,1365,10,Santa Clara,0.782,False,True,0
-Round of 32,1,1112,1,Arizona,1429,9,Utah St,0.881,False,True,0
-Round of 32,1,1458,5,Wisconsin,1116,4,Arkansas,0.403,True,False,20
-Round of 32,1,1400,11,Texas,1211,3,Gonzaga,0.413,True,False,20
-Round of 32,1,1345,2,Purdue,1281,10,Missouri,0.9,False,True,0
-Sweet 16,2,1181,1,Duke,1385,5,St John's,0.753,False,True,0
-Sweet 16,2,1257,6,Louisville,1163,2,Connecticut,0.391,True,False,40
-Sweet 16,2,1435,5,Vanderbilt,1196,1,Florida,0.373,True,False,40
-Sweet 16,2,1228,3,Illinois,1222,2,Houston,0.376,True,False,40
-Sweet 16,2,1276,1,Michigan,1104,4,Alabama,0.916,False,True,0
-Sweet 16,2,1397,6,Tennessee,1235,2,Iowa St,0.381,True,False,40
-Sweet 16,2,1112,1,Arizona,1458,5,Wisconsin,0.877,False,True,0
-Sweet 16,2,1345,2,Purdue,1400,11,Texas,0.821,False,True,0
-Elite Eight,3,1181,1,Duke,1257,6,Louisville,0.877,False,True,0
-Elite Eight,3,1228,3,Illinois,1435,5,Vanderbilt,0.812,False,True,0
-Elite Eight,3,1276,1,Michigan,1397,6,Tennessee,0.877,False,True,0
-Elite Eight,3,1112,1,Arizona,1345,2,Purdue,0.783,False,True,0
-Final Four,4,1228,3,Illinois,1181,1,Duke,0.37,True,False,160
-Final Four,4,1276,1,Michigan,1112,1,Arizona,0.803,False,True,0
-Championship,5,1228,3,Illinois,1276,1,Michigan,0.338,True,False,320
+Round of 32,1,1222,2,Houston,1401,10,Texas A&M,0.931,False,True,0
+Round of 32,1,1276,1,Michigan,1208,8,Georgia,0.928,False,True,0
+Round of 32,1,1104,4,Alabama,1403,5,Texas Tech,0.673,False,True,0
+Round of 32,1,1397,6,Tennessee,1438,3,Virginia,0.394,True,False,20
+Round of 32,1,1235,2,Iowa St,1365,10,Santa Clara,0.766,False,True,0
+Round of 32,1,1112,1,Arizona,1429,9,Utah St,0.853,False,True,0
+Round of 32,1,1458,5,Wisconsin,1116,4,Arkansas,0.454,True,False,20
+Round of 32,1,1211,3,Gonzaga,1400,11,Texas,0.671,False,True,0
+Round of 32,1,1345,2,Purdue,1281,10,Missouri,0.908,False,True,0
+Sweet 16,2,1181,1,Duke,1242,4,Kansas,0.924,False,True,0
+Sweet 16,2,1257,6,Louisville,1417,7,UCLA,0.675,False,True,0
+Sweet 16,2,1435,5,Vanderbilt,1196,1,Florida,0.421,True,False,40
+Sweet 16,2,1222,2,Houston,1228,3,Illinois,0.673,False,True,0
+Sweet 16,2,1276,1,Michigan,1104,4,Alabama,0.865,False,True,0
+Sweet 16,2,1397,6,Tennessee,1235,2,Iowa St,0.35,True,False,40
+Sweet 16,2,1112,1,Arizona,1458,5,Wisconsin,0.834,False,True,0
+Sweet 16,2,1345,2,Purdue,1211,3,Gonzaga,0.78,False,True,0
+Elite Eight,3,1181,1,Duke,1257,6,Louisville,0.838,False,True,0
+Elite Eight,3,1222,2,Houston,1435,5,Vanderbilt,0.628,False,True,0
+Elite Eight,3,1276,1,Michigan,1397,6,Tennessee,0.834,False,True,0
+Elite Eight,3,1112,1,Arizona,1345,2,Purdue,0.766,False,True,0
+Final Four,4,1181,1,Duke,1222,2,Houston,0.773,False,True,0
+Final Four,4,1276,1,Michigan,1112,1,Arizona,0.675,False,True,0
+Championship,5,1181,1,Duke,1276,1,Michigan,0.675,False,True,0

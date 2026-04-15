@@ -5,9 +5,12 @@ Run with:  streamlit run dashboard.py
 
 from __future__ import annotations
 
+import logging
 import os
 import sys
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 _root = Path(__file__).resolve().parent
 
@@ -29,6 +32,7 @@ from engine.bracket import Bracket, ROUND_LABELS
 from engine.models.seeding import SeedingModel
 from engine.evaluation import (
     accuracy_table,
+    calibration_summary,
     games_graded_count,
     merge_tournament_results_into_bracket_dfs,
     overall_pick_accuracy,
@@ -80,13 +84,13 @@ def build_models(db: TeamDB):
     try:
         from engine.models.advanced_metrics import AdvancedMetricsModel
         models["Comparative Metrics"] = AdvancedMetricsModel(str(DATA_DIR / "models"))
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.warning("Failed to load Comparative Metrics model: %s", exc)
     try:
         from engine.models.greg_v1 import GregV1Model
         models["Greg_v1"] = GregV1Model(str(DATA_DIR / "models"))
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.warning("Failed to load Greg_v1 model: %s", exc)
     # Probability-based models (require prob_model.pkl artifacts)
     try:
         from engine.models.probability import (
@@ -101,30 +105,27 @@ def build_models(db: TeamDB):
         models["Lean GB (Tiered Threshold)"] = ThresholdProbabilityModel(
             str(DATA_DIR / "models"),
         )
-        # MC Consensus is fast only when the notebook has exported
-        # `data/cache/mc_slot_consensus_2026.csv`. If missing, the model will be skipped
-        # with a clear message instead of freezing the dashboard on startup.
         models["Lean GB (MC Consensus)"] = MonteCarloConsensusModel(
             str(DATA_DIR / "models"),
             n_sims=10_000,
             random_seed=12345,
         )
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.warning("Failed to load probability models: %s", exc)
     has_api_key = bool(os.environ.get("ANTHROPIC_API_KEY"))
     if has_api_key:
         try:
             from engine.models.animal_kingdom import AnimalKingdomModel
             models["Animal Kingdom"] = AnimalKingdomModel()
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.warning("Failed to load Animal Kingdom model: %s", exc)
         try:
             from engine.models.vegas_odds import VegasOddsModel
             models["Vegas Odds"] = VegasOddsModel(
                 lines_path=DATA_DIR / "vegas_lines.csv",
             )
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.warning("Failed to load Vegas Odds model: %s", exc)
     return models
 
 
@@ -1187,6 +1188,29 @@ def accuracy_section(bracket_dfs: dict):
             margin=dict(t=40, b=20),
         )
         st.plotly_chart(fig, use_container_width=True)
+
+    # Calibration metrics (Brier score + ECE)
+    cal_df = calibration_summary(bracket_dfs)
+    if not cal_df.empty and cal_df["n_games"].sum() > 0:
+        st.markdown("#### Calibration (Brier Score & ECE)")
+        st.caption(
+            "Lower is better for both metrics. "
+            "Brier score measures confidence accuracy; ECE measures systematic over/under-confidence."
+        )
+        display_cal = cal_df.copy()
+        display_cal["brier_score"] = display_cal["brier_score"].apply(
+            lambda v: f"{v:.4f}" if pd.notna(v) else "—"
+        )
+        display_cal["ece"] = display_cal["ece"].apply(
+            lambda v: f"{v:.4f}" if pd.notna(v) else "—"
+        )
+        st.dataframe(
+            display_cal.rename(columns={
+                "model": "Model", "brier_score": "Brier Score",
+                "ece": "ECE", "n_games": "Games",
+            }),
+            use_container_width=True, hide_index=True,
+        )
 
 
 def upset_tracker(df: pd.DataFrame):

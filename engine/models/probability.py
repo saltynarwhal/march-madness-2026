@@ -12,14 +12,17 @@ They also load the existing regression artifacts to generate plausible scores:
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 
 import joblib
 import numpy as np
 
+logger = logging.getLogger(__name__)
+
 from engine.db import TeamDB
-from engine.models.base import Prediction, PredictionModel
+from engine.models.base import Prediction, PredictionModel, scores_from_margin
 
 DATA_DIR = Path(__file__).resolve().parent.parent.parent / "data"
 
@@ -113,13 +116,14 @@ class _ProbabilityBackbone:
         """Seed-based placeholder scores when regressors are unavailable."""
         seed_a = db.get_seed(team_a_id)
         seed_b = db.get_seed(team_b_id)
+        if np.isnan(seed_a):
+            logger.warning("Missing seed for team %d, defaulting to 8", team_a_id)
+        if np.isnan(seed_b):
+            logger.warning("Missing seed for team %d, defaulting to 8", team_b_id)
         sa = int(seed_a) if not np.isnan(seed_a) else 8
         sb = int(seed_b) if not np.isnan(seed_b) else 8
-        gap = sb - sa  # positive when Team A (fav) is much better (lower seed)
-        total = 140.0
-        margin = max(min(gap * 1.5, 25.0), -25.0)
-        score_a = max((total + margin) / 2, 40.0)
-        score_b = max((total - margin) / 2, 40.0)
+        margin = max(min((sb - sa) * 1.5, 25.0), -25.0)
+        score_a, score_b = scores_from_margin(margin)
         return score_a, score_b, margin
 
     @staticmethod
@@ -172,8 +176,7 @@ class _ProbabilityBackbone:
             vec = self._matchup_feature_row(team_a_id, team_b_id, db, round_num, self._score_feature_cols)
             margin = float(self._margin_model.predict(vec)[0])  # type: ignore[union-attr]
             total = float(self._total_model.predict(vec)[0])  # type: ignore[union-attr]
-            score_a = max((total + margin) / 2, 40.0)
-            score_b = max((total - margin) / 2, 40.0)
+            score_a, score_b = scores_from_margin(margin, total)
             return score_a, score_b, margin
         return self._fallback_scores(team_a_id, team_b_id, db)
 
@@ -248,6 +251,10 @@ class ThresholdProbabilityModel(PredictionModel):
     def _threshold_for(self, seed_a: float, seed_b: float, round_num: int) -> float:
         if round_num <= 1:
             # R64 thresholds keyed by (fav, dog) with Team A convention = favored/lower seed.
+            if np.isnan(seed_a):
+                logger.warning("Missing seed_a in threshold lookup, defaulting to 8")
+            if np.isnan(seed_b):
+                logger.warning("Missing seed_b in threshold lookup, defaulting to 8")
             sa = int(seed_a) if not np.isnan(seed_a) else 8
             sb = int(seed_b) if not np.isnan(seed_b) else 8
             key = (min(sa, sb), max(sa, sb))
@@ -306,17 +313,19 @@ class MonteCarloConsensusModel(PredictionModel):
         models_dir: Path | str | None = None,
         n_sims: int = 10_000,
         random_seed: int = 12345,
+        season: int = 2026,
     ):
         self._core = _ProbabilityBackbone(models_dir=models_dir)
         self._n = int(n_sims)
         self._rng = np.random.default_rng(int(random_seed))
         self._consensus: dict[str, tuple[int, float]] | None = None  # slot_id -> (winner_id, freq)
+        self._season = season
 
         # Load seeds/slots lazily from the repo’s `data/kaggle/` the same way dashboard does.
         self._data_dir = Path(models_dir).resolve().parent if models_dir else DATA_DIR
         self._seeds_df = None
         self._slots_df = None
-        self._precomputed_path = self._data_dir / "cache" / "mc_slot_consensus_2026.csv"
+        self._precomputed_path = self._data_dir / "cache" / f"mc_slot_consensus_{season}.csv"
 
     def _load_bracket_inputs(self):
         if self._seeds_df is not None and self._slots_df is not None:
@@ -336,7 +345,13 @@ class MonteCarloConsensusModel(PredictionModel):
             import pandas as pd
 
             df = pd.read_csv(self._precomputed_path)
-            df = df[df.get("season", 2026) == 2026] if "season" in df.columns else df
+            if "season" in df.columns:
+                df = df[df["season"] == self._season]
+                if df.empty:
+                    raise ValueError(
+                        f"MC consensus CSV has no rows for season {self._season}. "
+                        f"Re-export from the notebook for the correct season."
+                    )
             needed = {"slot_id", "winner_team_id", "win_freq"}
             if needed.issubset(set(df.columns)) and not df.empty:
                 self._consensus = {
