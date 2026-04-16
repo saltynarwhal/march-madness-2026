@@ -61,6 +61,56 @@ class TeamDB:
                     df["adj_em_diff"].fillna(0).to_numpy(),
                 )
 
+    @classmethod
+    def from_season_df(cls, season_df: pd.DataFrame, data_dir=None):
+        """Build a TeamDB from an arbitrary season DataFrame (for backtesting).
+
+        The DataFrame must have a ``kaggle_team_id`` column. All other columns
+        are treated as team facts (adj_em, barthag, etc.).
+        """
+        obj = object.__new__(cls)
+        data_dir = Path(data_dir) if data_dir else DATA_DIR
+
+        obj._season = season_df.copy()
+        obj._season["kaggle_team_id"] = pd.to_numeric(
+            obj._season["kaggle_team_id"], errors="coerce"
+        )
+
+        teams_path = data_dir / "kaggle" / "MTeams.csv"
+        obj._teams = pd.read_csv(teams_path) if teams_path.exists() else pd.DataFrame()
+
+        obj._team_facts = {}
+        for _, row in obj._season.iterrows():
+            tid = row.get("kaggle_team_id")
+            if pd.notna(tid):
+                obj._team_facts[int(tid)] = row.to_dict()
+
+        for facts in obj._team_facts.values():
+            facts["win_pct"] = cls._parse_record(facts.get("record", ""))
+
+        obj._seeds = {}
+        obj._name_index = obj._build_name_index()
+
+        matchup_path = data_dir / "matchup_dataset.csv"
+        obj._matchups = (
+            pd.read_csv(matchup_path, low_memory=False)
+            if matchup_path.exists()
+            else pd.DataFrame()
+        )
+        obj._lr_seed_em = None
+        if (
+            not obj._matchups.empty
+            and "adj_em_diff" in obj._matchups.columns
+            and "seed_diff" in obj._matchups.columns
+        ):
+            df = obj._matchups.dropna(subset=["adj_em_diff", "seed_diff"])
+            if len(df) >= 10:
+                obj._lr_seed_em = LinearRegression().fit(
+                    df[["seed_diff"]].fillna(0).to_numpy(),
+                    df["adj_em_diff"].fillna(0).to_numpy(),
+                )
+        return obj
+
     # ------------------------------------------------------------------
     # Seed helpers
     # ------------------------------------------------------------------

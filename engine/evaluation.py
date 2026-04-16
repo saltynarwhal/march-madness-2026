@@ -336,3 +336,184 @@ def _expected_calibration_error(
         avg_acc = outcomes[mask].mean()
         ece += (n / total) * abs(avg_acc - avg_conf)
     return float(ece)
+
+
+# ------------------------------------------------------------------
+# Multi-Year Backtesting
+# ------------------------------------------------------------------
+
+
+def backtest_seasons(
+    model_builders: dict[str, callable],
+    barttorvik_df: pd.DataFrame,
+    crosswalk_df: pd.DataFrame,
+    seeds_df: pd.DataFrame,
+    slots_df: pd.DataFrame,
+    results_df: pd.DataFrame,
+    seasons: list[int] | None = None,
+    data_dir: str | None = None,
+) -> pd.DataFrame:
+    """Backtest models on historical tournament seasons.
+
+    Parameters
+    ----------
+    model_builders : dict
+        {name: callable} where each callable returns a PredictionModel instance.
+    barttorvik_df : DataFrame
+        Multi-year Barttorvik data with 'season' and 'kaggle_team_id' columns.
+    crosswalk_df : DataFrame
+        Barttorvik-to-Kaggle name mapping.
+    seeds_df : DataFrame
+        Kaggle MNCAATourneySeeds.csv.
+    slots_df : DataFrame
+        Kaggle MNCAATourneySlots.csv.
+    results_df : DataFrame
+        Kaggle MNCAATourneyCompactResults.csv (actual tournament outcomes).
+    seasons : list[int], optional
+        Seasons to backtest. Defaults to [2023, 2024, 2025].
+    data_dir : str, optional
+        Path to data/ directory for model artifact loading.
+
+    Returns
+    -------
+    DataFrame with columns: season, model, correct, total, accuracy, brier_score
+    """
+    import re
+    from engine.bracket import Bracket
+    from engine.db import TeamDB
+
+    if seasons is None:
+        seasons = [2023, 2024, 2025]
+
+    rows: list[dict] = []
+
+    for season in seasons:
+        # ── Build season-specific TeamDB from Barttorvik data ──
+        bart_season = barttorvik_df[barttorvik_df["season"] == season].copy()
+        if bart_season.empty:
+            print(f"  [SKIP] No Barttorvik data for {season}")
+            continue
+
+        # Merge crosswalk to get kaggle_team_id
+        if "kaggle_team_id" not in bart_season.columns and crosswalk_df is not None:
+            bart_season = bart_season.merge(
+                crosswalk_df[["bart_name", "kaggle_team_id"]],
+                left_on="team", right_on="bart_name", how="left",
+            )
+
+        # Filter to tournament teams only
+        tourn_ids = seeds_df.loc[seeds_df["Season"] == season, "TeamID"].unique()
+        bart_season["kaggle_team_id"] = pd.to_numeric(
+            bart_season["kaggle_team_id"], errors="coerce"
+        )
+        bart_season = bart_season[bart_season["kaggle_team_id"].isin(tourn_ids)].copy()
+
+        if bart_season.empty:
+            print(f"  [SKIP] No tournament teams matched for {season}")
+            continue
+
+        db = TeamDB.from_season_df(bart_season, data_dir=data_dir)
+        db.load_seeds(seeds_df, season=season)
+
+        # ── Build actuals from Kaggle tournament results ──
+        season_results = results_df[results_df["Season"] == season].copy()
+        # Map DayNum to round number using seed-round-slot mapping
+        # Simpler: use the bracket's slot structure to inject actuals
+        actuals_records = []
+        for _, game in season_results.iterrows():
+            actuals_records.append({
+                "winner_id": int(game["WTeamID"]),
+                "loser_id": int(game["LTeamID"]),
+                "winner_score": int(game["WScore"]),
+                "loser_score": int(game["LScore"]),
+            })
+
+        # ── Simulate bracket for each model ──
+        for model_name, builder in model_builders.items():
+            try:
+                model = builder()
+            except Exception as exc:
+                print(f"  [SKIP] {model_name} failed to build: {exc}")
+                continue
+
+            bracket = Bracket(seeds_df, slots_df, season=season)
+            bracket.simulate(model, db)
+
+            # ── Inject actuals by matching winners to slots ──
+            bdf = bracket.to_dataframe(db)
+
+            # Match actual winners: for each slot with a prediction, check if
+            # the actual winner matches the predicted winner.
+            correct = 0
+            total = 0
+            confs = []
+            outcomes = []
+
+            for _, slot_row in bdf.iterrows():
+                pred_winner = slot_row.get("pred_winner_id")
+                if pd.isna(pred_winner):
+                    continue
+
+                # Find actual winner for this matchup
+                strong_id = slot_row.get("strong_team_id")
+                weak_id = slot_row.get("weak_team_id")
+                if pd.isna(strong_id) or pd.isna(weak_id):
+                    continue
+
+                strong_id = int(strong_id)
+                weak_id = int(weak_id)
+
+                # Look up actual result: who won between these two teams?
+                actual_winner = None
+                for game in actuals_records:
+                    w, l = game["winner_id"], game["loser_id"]
+                    if (w == strong_id and l == weak_id) or (w == weak_id and l == strong_id):
+                        actual_winner = w
+                        break
+
+                if actual_winner is None:
+                    continue  # game not found (play-in or unmatched)
+
+                total += 1
+                if int(pred_winner) == actual_winner:
+                    correct += 1
+
+                conf = slot_row.get("confidence")
+                if pd.notna(conf):
+                    confs.append(float(conf))
+                    outcomes.append(1.0 if int(pred_winner) == actual_winner else 0.0)
+
+            accuracy = correct / total if total > 0 else np.nan
+            brier = float(np.mean([(c - o) ** 2 for c, o in zip(confs, outcomes)])) if confs else np.nan
+
+            rows.append({
+                "season": season,
+                "model": model_name,
+                "correct": correct,
+                "total": total,
+                "accuracy": round(accuracy, 4) if not np.isnan(accuracy) else np.nan,
+                "brier_score": round(brier, 4) if not np.isnan(brier) else np.nan,
+            })
+
+        print(f"  {season}: backtested {len(model_builders)} models on {total} games")
+
+    result_df = pd.DataFrame(rows)
+
+    # Add aggregate row per model
+    if not result_df.empty:
+        agg_rows = []
+        for model_name in result_df["model"].unique():
+            mdf = result_df[result_df["model"] == model_name]
+            total_correct = mdf["correct"].sum()
+            total_games = mdf["total"].sum()
+            agg_rows.append({
+                "season": "ALL",
+                "model": model_name,
+                "correct": total_correct,
+                "total": total_games,
+                "accuracy": round(total_correct / total_games, 4) if total_games > 0 else np.nan,
+                "brier_score": round(mdf["brier_score"].mean(), 4),
+            })
+        result_df = pd.concat([result_df, pd.DataFrame(agg_rows)], ignore_index=True)
+
+    return result_df
